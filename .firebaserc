@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "kormanyablak-6e71e": {
+      "hosting": {
+        "okmanyiroda": [
+          "kormanyablak"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "kormanyablak-6e71e"
+  }
+}

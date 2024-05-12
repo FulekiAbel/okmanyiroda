@@ -1,0 +1,83 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 mt-3">
+      <div class="text-end">
+        <button mat-raised-button color="warn" type="button" class="btn btn-outline-danger" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 mt-5" >
+      <mat-card class="card border-0 shadow p-3">
+        <div class="form-floating mb-3 text-center">
+          <h1 class="text-center text-warning">Add Appointment</h1>
+        </div>
+        <div class="form-floating mb-3">
+          <mat-form-field appearance="fill">
+            <mat-label>Subject</mat-label>
+            <mat-select [(ngModel)]="subject" name="subject">
+              <mat-option value="Jogosítvány">Jogosítvány</mat-option>
+              <mat-option value="Személyigazolvány">Személyigazolvány</mat-option>
+              <mat-option value="Lakcímkártya">Lakcímkártya</mat-option>
+              <mat-option value="TAJ kártya">TAJ kártya</mat-option>
+            </mat-select>
+            <mat-icon matSuffix>subject</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="form-floating mb-3">
+          <mat-form-field apperance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker"  [(ngModel)]="day" name="day">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="form-floating mb-3">
+          <mat-form-field appearance="fill">
+            <mat-label>Time</mat-label>
+            <mat-select [(ngModel)]="time" name="time">
+              <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour }}</mat-option>
+            </mat-select>
+            <mat-icon matSuffix>access_time</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="form-floating mb-3">
+          <mat-form-field appearance="fill">
+            <mat-label>City</mat-label>
+            <input matInput [(ngModel)]="city" name="city">
+            <mat-icon matSuffix>location_city</mat-icon>
+          </mat-form-field>
+        </div>
+        <button mat-raised-button color="primary" type="button" class="btn btn-outline-success float-end" (click)="addAppointment()">Add Appointment</button>
+      </mat-card>
+    </div>
+    <div class="col-md-8 mt-5">
+      <mat-card class="card border-0 shadow p-3">
+        <div class="text-center">
+          <h1 class="text-danger">Appointments List</h1>
+        </div>
+        <div class="card-body">
+          <mat-chip-set aria-label="">
+            <mat-chip [class.selected]="selectedChip === 'All'" (click)="filterAppointments(null)">All</mat-chip>
+            <mat-chip [class.selected]="selectedChip === 'Jogosítvány'" (click)="filterAppointments('Jogosítvány')">Jogosítvány</mat-chip>
+            <mat-chip [class.selected]="selectedChip === 'Személyigazolvány'" (click)="filterAppointments('Személyigazolvány')">Személyigazolvány</mat-chip>
+            <mat-chip [class.selected]="selectedChip === 'Lakcímkártya'" (click)="filterAppointments('Lakcímkártya')">Lakcímkártya</mat-chip>
+            <mat-chip [class.selected]="selectedChip === 'TAJ kártya'" (click)="filterAppointments('TAJ kártya')">TAJ kártya</mat-chip>
+          </mat-chip-set>
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let appointment of filteredAppointments">
+              <div>
+                <span>Nap: {{ timestamptToDayDate(appointment.day) }}</span><br>
+                <span>Time: {{ appointment.time}}</span><br>
+                <span>Subject: {{ appointment.subject }}</span><br>
+                <span>City: {{ appointment.city }}</span><br>
+                <span>Email: {{ appointment.email }}</span>
+                <button mat-raised-button class="btn btn-outline-danger float-end"  (click)="deleteAppointment(appointment)">Delete</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
