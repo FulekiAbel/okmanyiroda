@@ -30,6 +30,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {getStorage, provideStorage} from "@angular/fire/storage";
 
 @NgModule({
   declarations: [
@@ -42,6 +43,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environments.firebase),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
     AngularFirestoreModule,
     FormsModule,
     OwlDateTimeModule,
