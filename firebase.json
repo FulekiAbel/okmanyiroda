@@ -1,11 +1,10 @@
 {
-  "hosting": [
-    {
-      "target": "okmanyiroda",
-      "source": ".",
-      "frameworksBackend": {
-        "region": "europe-west1"
-      }
-    }
-  ]
+  "hosting": {
+    "public": "dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
 }
